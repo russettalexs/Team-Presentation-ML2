@@ -123,7 +123,7 @@ Now we can produce the ROC plot.
 
 ```{r}
 par(mfrow = c(1,2))
-rocplot(fitted, dat[train, "y"], main = "Training Data")
+# rocplot(fitted, dat[train, "y"], main = "Training Data")
 
 ```
 
@@ -135,7 +135,7 @@ gamma =50, cost=1, decision.values =T)
 
 fitted=attributes(predict(svmfit.flex ,dat[train ,], decision.values =T))$decision.values
 
-rocplot (fitted ,dat [train ,"y"], add =T,col ="red ")
+# rocplot (fitted ,dat [train ,"y"], add =T,col ="red ")
 ```
 
 However, these ROC curves are all on the training data. We are really
@@ -147,11 +147,11 @@ to provide the most accurate results.
 ```{r}
 fitted=attributes(predict(svmfit.opt ,dat[-train ,], decision.values =T))$decision.values
 
-rocplot (fitted ,dat [-train ,"y"], main ="Test Data")
+# rocplot (fitted ,dat [-train ,"y"], main ="Test Data")
 
 fitted =attributes(predict(svmfit.flex ,dat[-train ,], decision.values=T))$decision.values
 
-rocplot (fitted ,dat [-train ,"y"], add=T,col =" red ")
+# rocplot (fitted ,dat [-train ,"y"], add=T,col =" red ")
 ```
 
 
@@ -165,7 +165,12 @@ rocplot (fitted ,dat [-train ,"y"], add=T,col =" red ")
 ## SVM with Multiple Classes
 
 If the response is a factor containing more than two levels, then the svm()
-function will perform multi-class classification using the one-versus-one approach.
+function will perform multi-class classification using the one-versus-one approach. We explore that setting here by generating a third class of observations.
+
+```{r}
+# rm(list=ls())
+```
+
 
 ```{r cars}
 library(e1071)
@@ -182,7 +187,7 @@ svmfit=svm(y~., data=dat , kernel ="radial", cost=10, gamma =1)
 plot(svmfit , dat)
 ```
 
-# Radial kernel support vector machine is a good approach when the data is not linearly separable. A cost argument allows us to specify the cost of a violation to the margin. When the cost argument is small, then the margins will be wide and many support vectors will be on the margin or will violate the margin. the gamma parameter defines how far the influence of a single training example reaches, with low values meaning 'far' and high values meaning 'close'
+Radial kernel support vector machine is a good approach when the data is not linearly separable. A cost argument allows us to specify the cost of a violation to the margin. When the cost argument is small, then the margins will be wide and many support vectors will be on the margin or will violate the margin. the gamma parameter defines how far the influence of a single training example reaches, with low values meaning 'far' and high values meaning 'close'
 
 ```{r}
 svmfit=svm(y~., data=dat , kernel ="radial", cost=10, gamma =1)
