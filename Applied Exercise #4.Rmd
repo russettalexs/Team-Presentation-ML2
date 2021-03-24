@@ -8,9 +8,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-
-## Applied Exercise #4
-
 ### Directions
 
 In this Applied Exercise, we will generate a simulated two-class data set with 100 observations and two features in which there is a visible but non-linear separation between the two classes. We will show that  in this setting, a support vector machine with a polynomial kernel (with degree greater than 1) or a radial kernel will outperform a support vector classifier on the training data. We will then tune each function, and determine which would perform the best on test data using 10-fold cross-validation.
@@ -225,7 +222,7 @@ Tuning the model, we see that optimal cost is 10 (the same as that of the polyno
 
 set.seed(2020)
 svm.radial.tune=tune(method = svm, class ~., data = data.frame(X, class = as.factor(class)),
-                   kernel = 'radial', ranges=list(cost=c(0.1, 1, 10, 100, 1000)))
+                   kernel = 'radial', ranges=list(cost=c(0.1, 1, 10, 100, 1000)), gamma=c(0.5,1,2,3,4))
 
 svm.radial.tune
 
